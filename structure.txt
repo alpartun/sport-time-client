@@ -1,0 +1,38 @@
+● src
++---● app
+|   +--● auth
+|   |  | --auth.guard.ts
+
+|   +--● event
+|   |  | --event.component.ts|html|scss
+|   |  +--● create-event
+|   |  |  |--create-event.component.ts|html|scss
+|   |  +--● get-events
+|   |  |  |--get-events.component.ts|html|scss
+|   +--● home
+|   |  | --home.component.ts|html|scss
+
+|   +--● main-nav-bar
+|   |  | --main-nav-bar.component.ts|html|scss
+
+|   +--● shared
+|   |  | --event.service.ts|
+|   |  | --user.service.ts
+
+|   +--● user
+|   |  | --user.component.ts|html|scss
+|   |  +--● edit-profile
+|   |  |  |--edit-profile.component.ts|html|scss
+|   |  +--● login
+|   |  |  |--login.component.ts|html|scss
+|   |  +--● profile
+|   |  |  |--profile.component.ts|html|scss
+|   |  +--● register
+|   |  |  |--register.component.ts|html|scss
+|   -- app-routing.module.ts
+|   -- app.module.ts
+|   -- Event.ts(interface)
+|   -- UserDetails.ts(interface)
++---● assets
+|   +--● img
+

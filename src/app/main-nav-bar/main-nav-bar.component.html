@@ -1,0 +1,27 @@
+<mat-toolbar class='navbar'>
+  <span>
+    <mat-icon>sports</mat-icon>
+    SporTTime
+  </span>
+
+  <button style="margin-left: 5px;background-color: #2e3137;" mat-button color="" *ngIf="service.isAuthenticated ==true " (click)="getEvents()" routerLink="/get-events" routerLinkActive="active">Events</button>
+  <!--<button mat-raised-button class="login" routerLink="/user" routerLinkActive="active">Users</button>-->
+  <div class="spacer">
+
+  </div>
+  <div class="asd">
+    <button style="margin-right: 5px;background-color: #2e3137;" mat-button color="" *ngIf="service.isAuthenticated ==true " (click)="createEvent()" routerLink="/create-event" routerLinkActive="active">Create Event</button>
+
+  <button style="margin-right: 5px;background-color: #2e3137;" mat-button color="" *ngIf="service.isAuthenticated ==true " (click)="onProfile()" routerLink="/profile" routerLinkActive="active">Profile</button>
+
+  <button style="margin-right: 5px;background-color: #2e3137;" mat-button color="" *ngIf="service.isAuthenticated ==true " (click)="onLogout()">Logout</button>
+
+
+  </div>
+
+  <!-- <button mat-raised-button color ='warn'>Login</button>
+  <button mat-raised-button color='primary' [routerLink]="['/user/register']" routerLinkActive="active" [queryParams]="{debug: true}">Register</button> -->
+
+
+
+</mat-toolbar>

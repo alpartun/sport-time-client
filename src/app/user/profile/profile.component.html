@@ -1,0 +1,32 @@
+
+<div *ngIf="check() && userDetails!=undefined " class="main-div">
+  <mat-card class="card">
+      <mat-card-header class="card-header">
+        <div mat-card-avatar>
+          <img  matCardImage src="../../../assets/img/pepeProfile.png" class="header-image">
+        </div>
+          <mat-card-title style="margin-left: 10%;">{{userDetails.userName}}</mat-card-title>
+          <mat-card-subtitle class="card-subtitle" >{{userDetails.e_Mail}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="content"  >
+        <p>Fullname : {{userDetails.fullName}} </p>
+        <p>Surname : {{userDetails.surname}}</p>
+        <p>Age : {{userDetails.age}}</p>
+        <p>Gender : {{userDetails.gender=='male'? 'Male': "Female"}}</p>
+        <p>City : {{userDetails.position}}</p>
+        <p>Height : {{userDetails.height}}</p>
+        <p>Weight : {{userDetails.weight}}</p>
+
+      </mat-card-content>
+
+      <mat-card-footer>
+        <button mat-fab color="accent" style="float: right;" routerLink="/delete-profile" routerLinkActive="active"><mat-icon>delete</mat-icon></button>
+
+        <button mat-fab color="accent" style="float: right;margin-right: 2%;" routerLink="/edit-profile" routerLinkActive="active"><mat-icon>edit</mat-icon></button>
+
+
+      </mat-card-footer>
+  </mat-card>
+</div>
+
+

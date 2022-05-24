@@ -1,0 +1,306 @@
+
+<div *ngIf="check() && userDetails!=undefined " class="main-div">
+  <mat-card class="card">
+      <mat-card-header class="card-header">
+        <div mat-card-avatar>
+          <img  matCardImage src="../../../assets/img/pepeProfile.png" class="header-image">
+        </div>
+          <mat-card-title style="margin-left: 10%;">{{userDetails.userName}}</mat-card-title>
+          <mat-card-subtitle class="card-subtitle" >{{userDetails.e_Mail}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="content"  >
+        <p>Fullname : {{userDetails.fullName}} </p>
+        <p>Surname : {{userDetails.surname}}</p>
+        <p>Age : {{userDetails.age}}</p>
+        <p>Gender : {{userDetails.gender=='male'? "Male": "Female"}}</p>
+        <p>City : {{userDetails.position}}</p>
+        <p>Height : {{userDetails.height}}</p>
+        <p>Weight : {{userDetails.weight}}</p>
+      </mat-card-content>
+
+      <mat-card-footer>
+        </mat-card-footer>
+  </mat-card>
+<!-- </div>
+
+
+<mat-card  [formGroup]="service.formModelEdit" (ngSubmit)="onSave()" class="matcard" *ngIf="check() && userDetails!=undefined ">
+      <div fxLayout="row" class="form-group" >
+
+        <mat-form-field  >
+          <mat-label>Fullname</mat-label>
+          <input matInput formControlName='FullName' required="*" class="form-control"  value = 'userDetails.fullName' [(ngModel)]='userDetails.fullName'>
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+
+        <mat-form-field >
+          <mat-label>Surname</mat-label>
+          <input matInput placeholder="" formControlName='Surname' class="form-control" [(ngModel)]='userDetails.surname'>
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+    </div>
+    <div fxLayout="row" class="form-group">
+
+        <mat-form-field  >
+          <mat-error *ngIf="service.formModelEdit.get('UserName')?.touched && service.formModelEdit.get('UserName')?.errors?.['required'] " >
+          Username is required.
+          </mat-error>
+            <mat-label>
+              Username
+            </mat-label>
+          <input matInput [(ngModel)]='userDetails.userName' formControlName='UserName' required="*" class="form-control">
+          <mat-icon matSuffix>face</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field >
+          <mat-label>Age</mat-label>
+          <input matInput [(ngModel)]='userDetails.age' formControlName='Age' required="*" class="form-control">
+          <mat-icon matSuffix>face</mat-icon>
+        </mat-form-field>
+
+    </div>
+    <div fxLayout="row" formGroupName="Passwords" class="form-group">
+
+        <mat-form-field  >
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="" [type]="hide ? 'password' : 'text'" formControlName='Password' required="*" class="form-control">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+          </button>
+        </mat-form-field>
+
+        <mat-form-field >
+          <mat-label>Confirmed Password</mat-label>
+          <input matInput placeholder="" [type]="cHide ? 'password' : 'text'" formControlName='ConfirmedPassword' class="form-control">
+          <mat-error *ngIf="service.formModelEdit.get('Passwords.ConfirmedPassword')?.touched && service.formModelEdit.get('Passwords.ConfirmedPassword')?.errors?.['passwordMissmatch'] ">
+          Passwords are does not match.
+          </mat-error>
+
+          <button mat-icon-button matSuffix (click)="cHide = !cHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" required="*" class="form-control">
+            <mat-icon>{{cHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+          </button>
+        </mat-form-field>
+
+    </div>
+    <div fxLayout="row" class="form-group">
+
+        <mat-form-field  >
+          <mat-label>E Mail</mat-label>
+          <input matInput [(ngModel)]='userDetails.e_Mail' formControlName='E_Mail' required="*" class="form-control">
+          <mat-error *ngIf="service.formModelEdit.get('E_Mail')?.touched && service.formModelEdit.get('E_Mail')?.errors?.['email'] ">
+           e_mail is required.
+          </mat-error>
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field >
+          <mat-label>Confirmed E Mail</mat-label>
+          <input matInput [(ngModel)]='userDetails.e_Mail' formControlName='ConfirmedE_Mail' required="*" class="form-control">
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+    </div>
+    <div fxLayout="row" class="form-group">
+
+        <mat-form-field  >
+          <mat-label>Gender</mat-label>
+          <mat-select  formControlName='Gender' required="*" [(value)]="selectedValue" >
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">
+              {{gender.viewValue}}
+            </mat-option>
+          </mat-select>
+
+
+              <mat-icon matSuffix>{{selectedValue}}</mat-icon>
+
+        </mat-form-field>
+
+        <mat-form-field >
+          <mat-label>Position</mat-label>
+          <input matInput [(ngModel)]='userDetails.position' formControlName='Position' required="*" class="form-control">
+          <mat-icon matSuffix>sports_soccer</mat-icon>
+        </mat-form-field>
+
+    </div>
+    <div fxLayout="row" class="form-group">
+        <mat-form-field >
+          <mat-label>Height</mat-label>
+          <input matInput [(ngModel)]='userDetails.height' formControlName='Height' class="form-control">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+
+        </mat-form-field>
+
+        <mat-form-field >
+          <mat-label>Weight</mat-label>
+          <input matInput [(ngModel)]='userDetails.weight' formControlName='Weight' class="form-control">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" class ='button' >
+
+    <button  mat-fab color="accent" style="float: right;" type="submit" [disabled]="!service.formModelEdit.valid" (click)="onSave()" routerLink="/home" routerLinkActive="active"><mat-icon>save</mat-icon></button>
+    </div>
+  </mat-card>
+ -->
+
+ <mat-card class="matcard" [formGroup]='formModelEdit' (ngSubmit)="onSubmit(formModelEdit)">
+   <div class="form-group" fxLayout='column'>
+
+
+     <mat-form-field>
+      <!-- <mat-label >ID : {{userDetails.id}}</mat-label> -->
+        <input
+        matInput
+        formControlName="Id"
+        [(ngModel)]=userDetails.id
+        hidden
+
+        class="form-control"
+      />
+<!--       <mat-icon matSuffix>person</mat-icon>
+ -->    </mat-form-field>
+    </div>
+    <div class="form-group" fxLayout='row'>
+    <mat-form-field>
+      <mat-label>Fullname</mat-label>
+      <input
+        matInput
+        formControlName="FullName"
+        [(ngModel)] = userDetails.fullName
+        required
+
+        class="form-control"
+      />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Surname</mat-label>
+      <input
+        matInput
+        formControlName="Surname"
+        [(ngModel)] = userDetails.surname
+                required
+
+        class="form-control"
+      />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+    </div>
+    <div class="form-group" fxLayout='row'>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        formControlName="UserName"
+        placeholder=""
+        [(ngModel)] = userDetails.userName
+
+        class="form-control"
+      />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Age</mat-label>
+      <input
+        matInput
+        formControlName="Age"
+        [(ngModel)] = userDetails.age
+
+        required
+
+        class="form-control"
+      />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+    </div>
+    <div class="form-group" fxLayout='row'>
+    <mat-form-field  >
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="" [type]="hide ? 'password' : 'text'" formControlName='Password' required="*" class="form-control">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+      </button>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>Confirmed Password</mat-label>
+      <input matInput placeholder="" [type]="cHide ? 'password' : 'text'" formControlName='ConfirmedPassword' required="*" class="form-control">
+      <mat-error *ngIf="service.formModelEdit.get('Passwords.ConfirmedPassword')?.touched && service.formModelEdit.get('Passwords.ConfirmedPassword')?.errors?.['passwordMissmatch'] ">
+      Passwords are does not match.
+      </mat-error>
+
+      <button mat-icon-button matSuffix (click)="cHide = !cHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" required="*" class="form-control">
+        <mat-icon>{{cHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+      </button>
+    </mat-form-field>
+
+</div>
+<div fxLayout="row" class="form-group">
+
+    <mat-form-field  >
+      <mat-label>E Mail</mat-label>
+      <input matInput [(ngModel)]='userDetails.e_Mail' formControlName='E_Mail' required="*" class="form-control">
+      <mat-error *ngIf="service.formModelEdit.get('E_Mail')?.touched && service.formModelEdit.get('E_Mail')?.errors?.['email'] ">
+       e_mail is required.
+      </mat-error>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>Confirmed E Mail</mat-label>
+      <input matInput [(ngModel)]='userDetails.e_Mail' formControlName='ConfirmedE_Mail' required="*" class="form-control">
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+</div>
+<div fxLayout="row" class="form-group">
+
+    <mat-form-field  >
+      <mat-label>Gender</mat-label>
+      <mat-select  formControlName='Gender' required="*" [(value)]="selectedValue" >
+        <mat-option *ngFor="let gender of genders" [value]="gender.value">
+          {{gender.viewValue}}
+        </mat-option>
+      </mat-select>
+
+
+          <mat-icon matSuffix>{{selectedValue}}</mat-icon>
+
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>City</mat-label>
+      <input matInput [(ngModel)]='userDetails.position' formControlName='Position' required="*" class="form-control">
+      <mat-icon matSuffix>location_city</mat-icon>
+    </mat-form-field>
+
+</div>
+<div fxLayout="row" class="form-group">
+    <mat-form-field >
+      <mat-label>Height</mat-label>
+      <input matInput [(ngModel)]='userDetails.height' formControlName='Height' class="form-control">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>Weight</mat-label>
+      <input matInput [(ngModel)]='userDetails.weight' formControlName='Weight' class="form-control">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" class ='button' >
+    <button mat-fab color="accent"  type="submit" [disabled]="formModelEdit.invalid"  (click)="onSubmit(formModelEdit)" routerLink="/profile" routerLinkActive="active"><mat-icon>save</mat-icon></button>
+
+<!--      <button class="asd" mat-raised-button color="primary" type="submit"  [disabled]="formModelEdit.invalid" (click)="onSubmit(formModelEdit)" routerLink="/profile" routerLinkActive="active">Edit</button>
+ -->    </div>
+<!--     <button mat-fab color="accent"  type="submit" [disabled]="formModelEdit.invalid"  (click)="onSubmit(formModelEdit)" routerLink="/profile" routerLinkActive="active"><mat-icon>save</mat-icon></button>
+ -->
+</mat-card>
+<!-- [(ngModel)]="formModel.UserName" -->

@@ -1,0 +1,35 @@
+<div *ngIf="check() && userDetails!=undefined && this.service.getOneEvent" class="main-div">
+  <mat-card class="card" *ngFor="let item of this.service.getOneEvent">
+      <mat-card-header class="card-header">
+<!--         <div mat-card-avatar>
+  PHOTO URL HERE!!!
+          <img  matCardImage src="../../../assets/img/pepeProfile.png" class="header-image">
+        </div> -->
+          <mat-card-title style="margin-left: 10%;">{{item.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="content" >
+        <p>City : {{item.city}} </p>
+        <p> <strong>Location : </strong> {{item.location}}</p>
+        <p>Sport Type : {{item.sportType}}</p>
+        <p>Size : {{item.size}}</p>
+        <p>Start Date : {{item.startDate | date}}</p>
+        <p>End Date : {{item.endDate | date}}</p>
+        <p>Estimate Time : {{item.estimateTime}}</p>
+        <p>Amount : {{item.amount}}</p>
+        <p>Created By : {{item.createdBy}}</p>
+        <p>Count : {{item.count}}</p>
+
+      </mat-card-content>
+
+      <mat-card-footer>
+        <h3>Description : </h3>
+        <p>{{item.description}}</p>
+
+
+
+      </mat-card-footer>
+
+  </mat-card>
+</div>
+
+
