@@ -10,4 +10,5 @@ export interface UserDetails {
   position : string;
   height? : string;
   weight?: string;
+  participatedUserIds?:string[];
 }

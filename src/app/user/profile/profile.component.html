@@ -2,9 +2,9 @@
 <div *ngIf="check() && userDetails!=undefined " class="main-div">
   <mat-card class="card">
       <mat-card-header class="card-header">
-        <div mat-card-avatar>
+<!--         <div mat-card-avatar>
           <img  matCardImage src="../../../assets/img/pepeProfile.png" class="header-image">
-        </div>
+        </div> -->
           <mat-card-title style="margin-left: 10%;">{{userDetails.userName}}</mat-card-title>
           <mat-card-subtitle class="card-subtitle" >{{userDetails.e_Mail}}</mat-card-subtitle>
       </mat-card-header>
@@ -20,13 +20,20 @@
       </mat-card-content>
 
       <mat-card-footer>
-        <button mat-fab color="accent" style="float: right;" routerLink="/delete-profile" routerLinkActive="active"><mat-icon>delete</mat-icon></button>
+        <button mat-fab color="accent" style="float: right;"  (click)="deleteUser(this.userDetails.id,1)"><mat-icon>delete</mat-icon></button>
 
         <button mat-fab color="accent" style="float: right;margin-right: 2%;" routerLink="/edit-profile" routerLinkActive="active"><mat-icon>edit</mat-icon></button>
 
 
       </mat-card-footer>
   </mat-card>
+
+</div>
+
+<div *ngIf = "this.EventService.profileShowEvents">
+  <button *ngFor="let item of this.EventService.profileShowEvents"routerLink="/eventdetails/{{item.id}}"> {{item.name}}</button>
+
+
 </div>
 
 

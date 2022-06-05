@@ -25,7 +25,7 @@ userDetails:any;
       (err:any)=>{
         this.service.isAuthenticated=false;
         localStorage.removeItem('token');
-        console.log(err)
+        this.router.navigate(['/user/login']);
       }
     )
 /*     this.service.getUserProfile().subscribe(

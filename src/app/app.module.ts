@@ -47,6 +47,7 @@ import { GetEventsComponent } from './event/get-events/get-events.component';
 import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort';
 import { EventdetailsComponent } from './event/eventdetails/eventdetails.component';
+import { EditEventComponent } from './event/edit-event/edit-event.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { EventdetailsComponent } from './event/eventdetails/eventdetails.compone
     ProfileComponent,
     CreateEventComponent,
     GetEventsComponent,
-    EventdetailsComponent
+    EventdetailsComponent,
+    EditEventComponent
   ],
   imports: [
     BrowserModule,

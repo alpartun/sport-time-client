@@ -5,9 +5,9 @@
   PHOTO URL HERE!!!
           <img  matCardImage src="../../../assets/img/pepeProfile.png" class="header-image">
         </div> -->
-          <mat-card-title style="margin-left: 10%;">{{item.name}}</mat-card-title>
+          <mat-card-title >{{item.name}}</mat-card-title>
       </mat-card-header>
-      <mat-card-content class="content" >
+      <mat-card-content class="content">
         <p>City : {{item.city}} </p>
         <p> <strong>Location : </strong> {{item.location}}</p>
         <p>Sport Type : {{item.sportType}}</p>
@@ -18,6 +18,7 @@
         <p>Amount : {{item.amount}}</p>
         <p>Created By : {{item.createdBy}}</p>
         <p>Count : {{item.count}}</p>
+        <p hidden></p>
 
       </mat-card-content>
 
@@ -28,8 +29,21 @@
 
 
       </mat-card-footer>
+      <ng-container *ngIf="item.createdBy == userDetails.userName">
+        <button mat-fab color="accent" style="float: right;margin-right: 2%;" routerLink="/edit-event/{{item.id}}" routerLinkActive="active"><mat-icon>edit</mat-icon></button>
+
+
+
+      </ng-container>
+
+
 
   </mat-card>
+
+  <div *ngIf="this.userService.eventUsers">
+    <li *ngFor="let user of this.userService.eventUsers">{{user.userName}}</li>
+
+  </div>
 </div>
 
 

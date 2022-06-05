@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { EventService } from './event.service';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,8 +9,9 @@ import { UserDetails } from '../UserDetails';
 })
 export class UserService {
   isAuthenticated : any = false ;
-  constructor(private formBuilder : FormBuilder, private http : HttpClient) { }
+  constructor(private formBuilder : FormBuilder, private http : HttpClient, private toastr : ToastrService) { }
   readonly baseURL = 'http://localhost:22359/api';
+  eventUsers!:UserDetails[];
   formModelEdit = this.formBuilder.group({
     Id:[''],
     FullName:['',Validators.required],
@@ -79,8 +81,17 @@ export class UserService {
     var tokenHeader = new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')});
     return this.http.get(this.baseURL+'/UserProfile',{headers : tokenHeader});
   }
+  deleteUser(body:any){
+    this.http.post(this.baseURL+"/User/Delete",body).subscribe((res:any)=>{
+      if(res.message =="User deleted."){
+        this.toastr.success('','User deleted succesfully.')
+      }
+
+    });
+
+  }
   edit(formData : any){
-    var body = {
+/*     var body = {
       Id:this.formModelEdit.value.Id,
       FullName: this.formModelEdit.value.FullName,
       Surname: this.formModelEdit.value.Surname,
@@ -94,9 +105,16 @@ export class UserService {
       Position: this.formModelEdit.value.Position,
       Height: this.formModelEdit.value.Height,
       Weight: this.formModelEdit.value.Weight,
-    };
+    }; */
     return this.http.post(this.baseURL+'/User/Edit',formData);
 }
+  showEventUsers(body:any){
+    this.http.post(this.baseURL+"/User/EventUsers",body).subscribe(
+      (res:any)=>{
+        this.eventUsers = res as UserDetails[];
+      }
+    )
+  }
 /* createEvent(user?: UserDetails){
   console.log("asd");
   var form = {

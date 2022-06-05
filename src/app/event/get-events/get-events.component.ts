@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, timestamp } from 'rxjs';
 import { UserDetails } from './../../UserDetails';
 import { UserService } from 'src/app/shared/user.service';
 import { EventService } from './../../shared/event.service';
@@ -15,7 +15,10 @@ import {MatButtonModule} from '@angular/material/button';
 @Component({
   selector: 'app-get-events',
   templateUrl: './get-events.component.html',
-  styleUrls: ['./get-events.component.scss']
+  styleUrls: ['./get-events.component.scss'],
+
+
+
 })
 export class GetEventsComponent implements OnInit {
   userDetails!:UserDetails;
@@ -25,6 +28,9 @@ export class GetEventsComponent implements OnInit {
   elements: any = [];
   dataSource?:any;
   events?: Event[];
+  flagAny?:any;
+  eventIdList!:string[];
+
 
   events2? : Event[];
   dataSource2 = new MatTableDataSource<Event>();
@@ -38,6 +44,7 @@ export class GetEventsComponent implements OnInit {
       (res:any)=>{
         this.userService.isAuthenticated=true;
         this.userDetails = res ;
+        this.eventIdList=this.buttonStatus(this.userDetails.id);
       },
       (err:any)=>{
         localStorage.removeItem('token');
@@ -54,7 +61,10 @@ export class GetEventsComponent implements OnInit {
     this.events = this.service.refreshList();
     this.dataSource = new MatTableDataSource(this.service.refreshList());
 
-    console.log(this.dataSource)
+      //this.service.buttonStatus(this.userDetails.id);
+      //this.buttonStatus();
+
+
 
   }
   ngAfterViewInit() {
@@ -66,13 +76,58 @@ export class GetEventsComponent implements OnInit {
     return this.userService.isAuthenticated? true:false;
   }
   joinEvent(userId : string, eventId : number){
-    console.log("asd");
-    var body ={
+    // User join butonuna bastiginda buton statusu cagir ve userin join oldugu event listesini getir, sonrasinda ngIf kullanarak bu userin kayit oldugu eventlere bak
+    var body = {
       userId : userId,
       eventId : eventId
     }
      this.service.joinEventS(body)
-     this.router.navigateByUrl('/home')
+     this.ngOnInit();
+     this.router.navigateByUrl('/get-events');
+     this.ngOnInit();
+
+  }
+  disjoinEvent(userId : string , eventId : number) {
+    var body = {
+      userId : userId,
+      eventId : eventId
+    };
+    this.service.disJointEvent(body);
+    this.ngOnInit();
+    this.router.navigateByUrl('/get-events');
+    this.ngOnInit();
+
+
+  }
+/*    async buttonStatus(userId: string, eventId: number){
+    if(this.userDetails.id === undefined) {return}
+
+    var body = {
+      userId: userId,
+      eventId: eventId
+    };
+  this.service.buttonStatus(body)
+  await new Promise(resolve => setTimeout(resolve, 15));
+
+  console.log(this.service.flagAny);
+  this.flagAny = this.service.flagAny;
+  console.log(this.flagAny);
+
+    if(this.service.flagAny=="False"){
+      return true;
+    }
+    else if(this.service.flagAny=="True"){
+      return false;
+    }
+    return false;
+  } */
+  buttonStatus(userId:any){
+    var body = {
+      userId : userId,
+      eventId : 1
+    }
+    return this.service.buttonStatus(body);
+    //await new Promise(resolve => setTimeout(resolve, 15));
 
   }
 

@@ -40,7 +40,6 @@ export class CreateEventComponent implements OnInit {
   onSubmit(){
     this.services.createEvent(this.userDetails).subscribe(
       (res:any) => {
-        console.log(res);
         this.services.formModel.reset();
         this.toastr.success('','Event is created.')
       },

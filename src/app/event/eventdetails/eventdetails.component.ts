@@ -9,7 +9,7 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./eventdetails.component.scss']
 })
 export class EventdetailsComponent implements OnInit {
-  id?: any;
+  id!: any;
   userDetails?: any;
   event!: Event[];
 
@@ -20,6 +20,13 @@ export class EventdetailsComponent implements OnInit {
       (res:any)=>{
         this.userService.isAuthenticated=true;
         this.userDetails = res ;
+        var body = {
+          userId: this.userDetails.id,
+          eventId: parseInt(this.id)
+
+        }
+        this.userService.showEventUsers(body);
+
       },
       (err:any)=>{
         localStorage.removeItem('token');

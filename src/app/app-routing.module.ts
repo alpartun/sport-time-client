@@ -1,3 +1,4 @@
+import { EditEventComponent } from './event/edit-event/edit-event.component';
 import { EventdetailsComponent } from './event/eventdetails/eventdetails.component';
 import { GetEventsComponent } from './event/get-events/get-events.component';
 import { CreateEventComponent } from './event/create-event/create-event.component';
@@ -41,6 +42,10 @@ children:[
   {path :'eventdetails/:id',component: EventdetailsComponent,canActivate:[
     AuthGuard
   ]},
+  {path:'edit-event/:id',component:EditEventComponent, canActivate:[
+    AuthGuard
+  ]},
+
 ];
 
 @NgModule({
