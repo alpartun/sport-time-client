@@ -93,8 +93,7 @@ export class GetEventsComponent implements OnInit {
     };
     this.service.joinEventS(body);
     this.ngOnInit();
-    this.router.navigateByUrl('/get-events');
-    this.ngOnInit();
+
   }
   disjoinEvent(userId: string, eventId: number) {
     var body = {

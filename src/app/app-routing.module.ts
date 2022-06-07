@@ -1,3 +1,5 @@
+import { CreatedEventsComponent } from './event/created-events/created-events.component';
+import { JoinedEventsComponent } from './event/joined-events/joined-events.component';
 import { EditEventComponent } from './event/edit-event/edit-event.component';
 import { EventdetailsComponent } from './event/eventdetails/eventdetails.component';
 import { GetEventsComponent } from './event/get-events/get-events.component';
@@ -50,6 +52,16 @@ const routes: Routes = [
   {
     path: 'edit-event/:id',
     component: EditEventComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'joined-events',
+    component: JoinedEventsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'created-events',
+    component: CreatedEventsComponent,
     canActivate: [AuthGuard],
   },
 ];

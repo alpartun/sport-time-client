@@ -49,6 +49,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { EventdetailsComponent } from './event/eventdetails/eventdetails.component';
 import { EditEventComponent } from './event/edit-event/edit-event.component';
 import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { JoinedEventsComponent } from './event/joined-events/joined-events.component';
+import { CreatedEventsComponent } from './event/created-events/created-events.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,9 @@ import {MatListModule} from '@angular/material/list';
     CreateEventComponent,
     GetEventsComponent,
     EventdetailsComponent,
-    EditEventComponent
+    EditEventComponent,
+    JoinedEventsComponent,
+    CreatedEventsComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +98,7 @@ import {MatListModule} from '@angular/material/list';
     MatPaginatorModule,
     MatSortModule,
     MatListModule,
+    MatSidenavModule,
 
     ToastrModule.forRoot({
       positionClass:'toast-top-right'	,

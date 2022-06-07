@@ -16,17 +16,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 })
 export class ProfileComponent implements OnInit {
   userDetails?: UserDetails;
-  displayedColumns2: string[] = [
-    'name',
-    'city',
-    'sportType',
-    'startDate',
-    'size',
-    'count',
-    'info',
-  ];
-  dataSourceCreatedEvents = new MatTableDataSource<Event>();
-  events2!: Observable<Event>;
+
 
   constructor(
     private service: UserService,
@@ -42,13 +32,8 @@ export class ProfileComponent implements OnInit {
       (res: any) => {
         this.service.isAuthenticated = true;
         this.userDetails = res;
-        var body = {
-          userId: this.userDetails?.id,
-          eventId: 2,
-        };
-        this.EventService.createdEventsObservable(body).subscribe((e: any) => {
-          this.dataSourceCreatedEvents.data = e;
-        });
+
+
       },
       (err: any) => {
         localStorage.removeItem('token');
@@ -58,26 +43,6 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-  ngAfterViewInit() {
-
-    this.dataSourceCreatedEvents.sort = this.sort;
-    this.dataSourceCreatedEvents.paginator = this.paginator;
-  }
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
-  public doFilter = (value: string) => {
-    this.dataSourceCreatedEvents.filter = value.trim().toLocaleLowerCase();
-  };
-
 
 
   check() {
@@ -85,6 +50,7 @@ export class ProfileComponent implements OnInit {
   }
   edit() {}
   deleteUser(userId: string, eventId: number) {
+    if(window.confirm('Are you sure want to delete your account?')){
     var body = {
       userId: userId,
       eventId: eventId,
@@ -93,5 +59,6 @@ export class ProfileComponent implements OnInit {
     localStorage.removeItem('token');
     this.service.isAuthenticated = false;
     this.router.navigate(['/user/login']);
+  }
   }
 }

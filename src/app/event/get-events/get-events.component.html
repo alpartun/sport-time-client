@@ -219,6 +219,8 @@
             color="primary"
             aria-label="Actions Row"
             (click)="joinEvent(this.userDetails.id, myRowData.id)"
+            routerLink="/eventdetails/{{myRowData.id}}"
+            routerLinkActive="active"
           >
             <mat-icon>add</mat-icon>
           </button>
