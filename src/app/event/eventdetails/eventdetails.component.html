@@ -1,49 +1,165 @@
-<div *ngIf="check() && userDetails!=undefined && this.service.getOneEvent" class="main-div">
-  <mat-card class="card" *ngFor="let item of this.service.getOneEvent">
+<div
+  *ngIf="check() && userDetails != undefined && this.service.getOneEvent"
+  class="main-div"
+>
+  <div class="col" style="flex: 3">
+ <mat-card class="card" *ngFor="let item of this.service.getOneEvent">
       <mat-card-header class="card-header">
-<!--         <div mat-card-avatar>
-  PHOTO URL HERE!!!
-          <img  matCardImage src="../../../assets/img/pepeProfile.png" class="header-image">
-        </div> -->
-          <mat-card-title >{{item.name}}</mat-card-title>
+        <mat-card-title
+          ><strong
+            ><h1>{{ item.name }}</h1></strong
+          ></mat-card-title
+        >
       </mat-card-header>
       <mat-card-content class="content">
-        <p>City : {{item.city}} </p>
-        <p> <strong>Location : </strong> {{item.location}}</p>
-        <p>Sport Type : {{item.sportType}}</p>
-        <p>Size : {{item.size}}</p>
-        <p>Start Date : {{item.startDate | date}}</p>
-        <p>End Date : {{item.endDate | date}}</p>
-        <p>Estimate Time : {{item.estimateTime}}</p>
-        <p>Amount : {{item.amount}}</p>
-        <p>Created By : {{item.createdBy}}</p>
-        <p>Count : {{item.count}}</p>
-        <p hidden></p>
-
+        <p>City : {{ item.city }}</p>
+        <p><strong>Location : </strong> {{ item.location }}</p>
+        <p>Sport Type : {{ item.sportType }}</p>
+        <p>Size : {{ item.size }}</p>
+        <p>Start Date : {{ item.startDate | date }}</p>
+        <p>End Date : {{ item.endDate | date }}</p>
+        <p>Estimate Time : {{ item.estimateTime }}</p>
+        <p>Amount : {{ item.amount }}</p>
+        <p>Created By : {{ item.createdBy }}</p>
+        <p>Count : {{ item.count }}</p>
+        <p>Contact : {{item.contact}}</p>
       </mat-card-content>
 
       <mat-card-footer>
-        <h3>Description : </h3>
-        <p>{{item.description}}</p>
-
-
-
+        <h3>Description :</h3>
+        <p>{{ item.description }}</p>
       </mat-card-footer>
       <ng-container *ngIf="item.createdBy == userDetails.userName">
-        <button mat-fab color="accent" style="float: right;margin-right: 2%;" routerLink="/edit-event/{{item.id}}" routerLinkActive="active"><mat-icon>edit</mat-icon></button>
-
-
-
+        <button
+          mat-fab
+          color="accent"
+          style="float: right; margin-right: 2%"
+          *ngIf="item.id"
+          (click)="deleteEvent(this.userDetails.id, item.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button
+          mat-fab
+          color="accent"
+          style="float: right; margin-right: 2%"
+          routerLink="/edit-event/{{ item.id }}"
+          routerLinkActive="active"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
       </ng-container>
+    </mat-card>
 
 
+<!--     <div class="page-content page-container"  id="page-content" *ngIf="check() && userDetails != undefined">
+      <div class="padding">
+        <div class="row container d-flex justify-content-center">
+          <div class="col-xl-6 col-md-12">
 
-  </mat-card>
+            <div class="card user-card-full">
+              <div class="row m-l-0 m-r-0">
+                <div class="col-sm-4 bg-c-lite-green user-profile">
+                  <div class="card-block text-center text-white">
+                    <div class="m-b-25">
+                      <img
+                        src="../../../assets/img/pepeProfile.png"
+                        class="img-radius"
+                        alt="User-Profile-Image"
+                      />
+                    </div>
+                    <h6 class="f-w-600">{{userDetails.userName }}</h6>
 
-  <div *ngIf="this.userService.eventUsers">
-    <li *ngFor="let user of this.userService.eventUsers">{{user.userName}}</li>
+                    <i
+                      class="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"
+                    ></i>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <div class="card-block">
+                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Fullname</p>
+                        <h6 class="text-muted f-w-400">{{userDetails.fullName}}</h6>
+                      </div>
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Surname</p>
+                        <h6 class="text-muted f-w-400">{{userDetails.surname}}</h6>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Age</p>
+                        <h6 class="text-muted f-w-400">{{userDetails.age}}</h6>
+                      </div>
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Gender</p>
+                        <h6 class="text-muted f-w-400">{{userDetails.gender}}</h6>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">City</p>
+                        <h6 class="text-muted f-w-400">{{userDetails.position}}</h6>
+                      </div>
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Email</p>
+                        <h6 class="text-muted f-w-400">{{userDetails.e_Mail}}</h6>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Height</p>
+                        <h6 class="text-muted f-w-400">{{userDetails.height}}</h6>
+                      </div>
+                      <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Weight</p>
+                        <h6 class="text-muted f-w-400">{{userDetails.weight}}</h6>
+                      </div>
+                    </div>
+
+                  </div>
+                  <button
+                  mat-fab
+                  color="accent"
+                  style="float: right"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+
+                <button
+                  mat-fab
+                  color="accent"
+                  style="float: right; margin-right: 2%"
+                  routerLink="/edit-profile"
+                  routerLinkActive="active"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ -->
 
   </div>
+
+  <div
+    class="col"
+    style="flex: 1; margin-top: 4%"
+    *ngIf="this.userService.eventUsers"
+  >
+    <h2>Participates</h2>
+    <mat-list>
+      <mat-list-item *ngFor="let user of userService.eventUsers">
+        <img src="../../../assets/img/pepeProfile.png" matListAvatar alt="" />
+        <div matLine>Username : {{ user.userName }}</div>
+        <div matLine>Age : {{ user.age }}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
 </div>
-
-

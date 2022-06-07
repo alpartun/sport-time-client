@@ -14,42 +14,48 @@ import { AuthGuard } from './auth/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'/user/login',pathMatch:'full'},
-  {path:'event',component:EventComponent,canActivate:[
-    AuthGuard
-  ]},
-  {path:'create-event',component:CreateEventComponent,canActivate:[
-    AuthGuard
-  ]},
+  { path: '', redirectTo: '/user/login', pathMatch: 'full' },
+  { path: 'event', component: EventComponent, canActivate: [AuthGuard] },
+  {
+    path: 'create-event',
+    component: CreateEventComponent,
+    canActivate: [AuthGuard],
+  },
 
-  {path:'user', component:UserComponent,
-children:[
-  {path:'register', component:RegisterComponent},
-  {path:'login', component:LoginComponent},
-]},
-  {path:'home',component:HomeComponent,canActivate:[
-    AuthGuard
-  ]},
-  {path:'profile',component:ProfileComponent,canActivate:[
-    AuthGuard
-  ]},
-  {path:'edit-profile',component:EditProfileComponent,canActivate:[
-    AuthGuard
-  ]},
-  {path:'get-events',component:GetEventsComponent,canActivate:[
-    AuthGuard
-  ]},
-  {path :'eventdetails/:id',component: EventdetailsComponent,canActivate:[
-    AuthGuard
-  ]},
-  {path:'edit-event/:id',component:EditEventComponent, canActivate:[
-    AuthGuard
-  ]},
-
+  {
+    path: 'user',
+    component: UserComponent,
+    children: [
+      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginComponent },
+    ],
+  },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: 'edit-profile',
+    component: EditProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'get-events',
+    component: GetEventsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'eventdetails/:id',
+    component: EventdetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-event/:id',
+    component: EditEventComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

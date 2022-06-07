@@ -1,203 +1,233 @@
-<p>edit-event works!</p>
-<p>{{id}}</p>
+<div
+  *ngIf="check() && userDetails != undefined && this.service.getOneEvent"
+  class="main-div"
+>
+<!--   <mat-card class="card" *ngFor="let item of this.service.getOneEvent">
+    <mat-card-header class="card-header">
+      <mat-card-title>{{ item.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="content">
+      <p>City : {{ item.city }}</p>
+      <p><strong>Location : </strong> {{ item.location }}</p>
+      <p>Sport Type : {{ item.sportType }}</p>
+      <p>Size : {{ item.size }}</p>
+      <p>Start Date : {{ item.startDate | date }}</p>
+      <p>End Date : {{ item.endDate | date }}</p>
+      <p>Estimate Time : {{ item.estimateTime }}</p>
+      <p>Amount : {{ item.amount }}</p>
+      <p>Created By : {{ item.createdBy }}</p>
+      <p>Count : {{ item.count }}</p>
+      <p hidden></p>
+    </mat-card-content>
 
-<div *ngIf="check() && userDetails!=undefined && this.service.getOneEvent" class="main-div">
-  <mat-card class="card" *ngFor="let item of this.service.getOneEvent">
-      <mat-card-header class="card-header">
-<!--         <div mat-card-avatar>
-  PHOTO URL HERE!!!
-          <img  matCardImage src="../../../assets/img/pepeProfile.png" class="header-image">
-        </div> -->
-          <mat-card-title >{{item.name}}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content class="content">
-        <p>City : {{item.city}} </p>
-        <p> <strong>Location : </strong> {{item.location}}</p>
-        <p>Sport Type : {{item.sportType}}</p>
-        <p>Size : {{item.size}}</p>
-        <p>Start Date : {{item.startDate | date}}</p>
-        <p>End Date : {{item.endDate | date}}</p>
-        <p>Estimate Time : {{item.estimateTime}}</p>
-        <p>Amount : {{item.amount}}</p>
-        <p>Created By : {{item.createdBy}}</p>
-        <p>Count : {{item.count}}</p>
-        <p hidden></p>
-
-      </mat-card-content>
-
-      <mat-card-footer>
-        <h3>Description : </h3>
-        <p>{{item.description}}</p>
-
-
-
-      </mat-card-footer>
-      <ng-container *ngIf="item.createdBy == userDetails.userName">
-
-
-
-      </ng-container>
-
-
+    <mat-card-footer>
+      <h3>Description :</h3>
+      <p>{{ item.description }}</p>
+    </mat-card-footer>
+    <ng-container *ngIf="item.createdBy == userDetails.userName">
+    </ng-container>
   </mat-card>
-
-
-  <mat-card class="matcard" [formGroup]='formModelEdit' (ngSubmit)="onSubmit(formModelEdit)" *ngFor="let item of this.service.getOneEvent">
+ -->
+  <mat-card
+    class="matcard"
+    [formGroup]="formModelEdit"
+    (ngSubmit)="onSubmit(formModelEdit)"
+    *ngFor="let item of this.service.getOneEvent"
+  >
     <div fxLayout="row" class="form-group">
-      <mat-form-field>
+      <mat-form-field hidden>
         <!-- <mat-label >ID : {{userDetails.id}}</mat-label> -->
-          <input
+        <input
           matInput
           formControlName="Id"
-          [(ngModel)]=item.id
-          hidden
+          [(ngModel)]="item.id"
 
           class="form-control"
         />
-  <!--       <mat-icon matSuffix>person</mat-icon>
-   -->    </mat-form-field>
-   <mat-form-field>
-    <!-- <mat-label >ID : {{userDetails.id}}</mat-label> -->
-      <input
-      matInput
-      formControlName="count"
-      [(ngModel)]=item.count
-      hidden
+        <!--       <mat-icon matSuffix>person</mat-icon>
+   -->
+      </mat-form-field>
+      <mat-form-field hidden>
+        <!-- <mat-label >ID : {{userDetails.id}}</mat-label> -->
+        <input
+          matInput
+          formControlName="count"
+          [(ngModel)]="item.count"
+          hidden
+          class="form-control"
+        />
+        <!--       <mat-icon matSuffix>person</mat-icon>
+-->
+      </mat-form-field>
 
-      class="form-control"
-    />
-<!--       <mat-icon matSuffix>person</mat-icon>
--->    </mat-form-field>
-
-      <mat-form-field  >
+      <mat-form-field>
         <mat-label>Title</mat-label>
-        <input matInput
-        formControlName='Name'
-        [(ngModel)]=item.name
-        required="*"
-        class="form-control">
+        <input
+          matInput
+          formControlName="Name"
+          [(ngModel)]="item.name"
+          required="*"
+          class="form-control"
+        />
         <mat-icon matSuffix>title</mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Contact</mat-label>
+        <input
+          matInput
+          formControlName="Contact"
+          [(ngModel)]="item.contact"
+          required="*"
+          class="form-control"
+          placeholder="Email, Phone Number, Social Accounts etc."
+        />
+        <mat-icon matSuffix>contacts</mat-icon>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" class="form-group">
-      <mat-form-field >
+      <mat-form-field>
         <mat-label>Description</mat-label>
-        <textarea matInput
-        formControlName='Description'
-        [(ngModel)]=item.description
-
-        required="*"
-        class="form-control"></textarea>
+        <textarea
+          matInput
+          formControlName="Description"
+          [(ngModel)]="item.description"
+          required="*"
+          class="form-control"
+        ></textarea>
         <mat-icon matSuffix>description</mat-icon>
       </mat-form-field>
-      <mat-form-field  >
-        <mat-error *ngIf="this.formModelEdit.get('City')?.touched && this.formModelEdit.get('City')?.errors?.['required'] " >
-        City is required.
+      <mat-form-field>
+        <mat-error
+          *ngIf="this.formModelEdit.get('City')?.touched && this.formModelEdit.get('City')?.errors?.['required'] "
+        >
+          City is required.
         </mat-error>
-          <mat-label>
-            City
-          </mat-label>
-        <input matInput
-        formControlName='City'
-        [(ngModel)]=item.city
-
-        required="*"
-        class="form-control">
+        <mat-label> City </mat-label>
+        <input
+          matInput
+          formControlName="City"
+          [(ngModel)]="item.city"
+          required="*"
+          class="form-control"
+        />
         <mat-icon matSuffix>location_city</mat-icon>
       </mat-form-field>
-      <mat-form-field >
+      <mat-form-field>
         <mat-label>Location</mat-label>
-        <input matInput
-        formControlName='Location'
-        [(ngModel)]=item.location
-
-        required="*"
-        class="form-control">
+        <input
+          matInput
+          formControlName="Location"
+          [(ngModel)]="item.location"
+          required="*"
+          class="form-control"
+        />
         <mat-icon matSuffix>location_on</mat-icon>
       </mat-form-field>
-      <mat-form-field >
+      <mat-form-field>
         <mat-label>SportType</mat-label>
-        <input matInput
-        formControlName='SportType'
-        [(ngModel)]=item.sportType
-
-        required="*"
-        class="form-control">
+        <input
+          matInput
+          formControlName="SportType"
+          [(ngModel)]="item.sportType"
+          required="*"
+          class="form-control"
+        />
         <mat-icon matSuffix>sports</mat-icon>
       </mat-form-field>
 
-      <mat-form-field  >
+      <mat-form-field>
         <mat-label>Size</mat-label>
-        <input matInput
-        formControlName='Size'
-        [(ngModel)]=item.size
-        required="*"
-         class="form-control">
+        <input
+          matInput
+          formControlName="Size"
+          [(ngModel)]="item.size"
+          required="*"
+          class="form-control"
+        />
         <mat-icon matSuffix>group</mat-icon>
       </mat-form-field>
-
-  </div>
-  <div fxLayout="row" class="form-group">
-
+    </div>
+    <div fxLayout="row" class="form-group">
       <mat-form-field class="demo-full-width">
-        <input matInput
-        [matDatepicker]="picker"
-        matTooltip="startDate"
-        formControlName="StartDate"
-        [(ngModel)]=item.startDate
-
-        autocomplete="off">
-        <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          matTooltip="startDate"
+          formControlName="StartDate"
+          [(ngModel)]="item.startDate"
+          autocomplete="off"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="$any(picker)"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
- <mat-form-field class="demo-full-width">
-        <input matInput
-        [matDatepicker]="picker1"
-        matTooltip="endDate"
-        formControlName="EndDate"
-        [(ngModel)]=item.endDate
-
-        autocomplete="off">
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-form-field class="demo-full-width">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          matTooltip="endDate"
+          formControlName="EndDate"
+          [(ngModel)]="item.endDate"
+          autocomplete="off"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
-      <mat-form-field  >
+      <mat-form-field>
         <mat-label>Estimate Time</mat-label>
-        <input matInput
-         formControlName='EstimateTime'
-         [(ngModel)]=item.estimateTime
-
-         required="*"
-         class="form-control">
+        <input
+          matInput
+          formControlName="EstimateTime"
+          [(ngModel)]="item.estimateTime"
+          required="*"
+          class="form-control"
+        />
         <mat-icon matSuffix>timer</mat-icon>
       </mat-form-field>
-      <mat-form-field  >
+      <mat-form-field>
         <mat-label>Photo</mat-label>
-        <input matInput
-        formControlName='PhotoUrl'
-        [(ngModel)]=item.photoUrl
-
-        class="form-control">
+        <input
+          matInput
+          formControlName="PhotoUrl"
+          [(ngModel)]="item.photoUrl"
+          class="form-control"
+        />
         <mat-icon matSuffix>photo</mat-icon>
       </mat-form-field>
-      <mat-form-field  >
+      <mat-form-field>
         <mat-label>Amount</mat-label>
-        <input matInput
-        formControlName='Amount'
-        [(ngModel)]=item.amount
-        required="*"
-        class="form-control">
+        <input
+          matInput
+          formControlName="Amount"
+          [(ngModel)]="item.amount"
+          required="*"
+          class="form-control"
+        />
         <mat-icon matSuffix>money</mat-icon>
       </mat-form-field>
-
-
-  </div>
-  <div fxLayout="row" class ='button' >
-
-    <button class="asd" mat-raised-button color="primary" [disabled]="!formModelEdit.valid" type="submit"(click)="onSubmit(formModelEdit)" routerLink="/eventdetails/{{item.id}}" routerLinkActive="active">Create</button>
     </div>
- <!--     <button mat-fab color="accent"  type="submit" [disabled]="formModelEdit.invalid"  (click)="onSubmit(formModelEdit)" routerLink="/profile" routerLinkActive="active"><mat-icon>save</mat-icon></button>
+    <div fxLayout="row" class="button">
+      <button
+        class="asd"
+        mat-raised-button
+        color="primary"
+        [disabled]="!formModelEdit.valid"
+        type="submit"
+        (click)="onSubmit(formModelEdit)"
+        routerLink="/eventdetails/{{ item.id }}"
+        routerLinkActive="active"
+      >
+        Edit
+      </button>
+    </div>
+    <!--     <button mat-fab color="accent"  type="submit" [disabled]="formModelEdit.invalid"  (click)="onSubmit(formModelEdit)" routerLink="/profile" routerLinkActive="active"><mat-icon>save</mat-icon></button>
   -->
- </mat-card>
- <!-- [(ngModel)]="formModel.UserName" -->
+  </mat-card>
+  <!-- [(ngModel)]="formModel.UserName" -->
+</div>

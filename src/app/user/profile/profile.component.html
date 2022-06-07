@@ -1,39 +1,316 @@
-
-<div *ngIf="check() && userDetails!=undefined " class="main-div">
+<!-- <div *ngIf="check() && userDetails != undefined" class="main-div">
   <mat-card class="card">
-      <mat-card-header class="card-header">
-<!--         <div mat-card-avatar>
+    <mat-card-header class="card-header">
+             <div mat-card-avatar>
           <img  matCardImage src="../../../assets/img/pepeProfile.png" class="header-image">
-        </div> -->
-          <mat-card-title style="margin-left: 10%;">{{userDetails.userName}}</mat-card-title>
-          <mat-card-subtitle class="card-subtitle" >{{userDetails.e_Mail}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content class="content"  >
-        <p>Fullname : {{userDetails.fullName}} </p>
-        <p>Surname : {{userDetails.surname}}</p>
-        <p>Age : {{userDetails.age}}</p>
-        <p>Gender : {{userDetails.gender=='male'? 'Male': "Female"}}</p>
-        <p>City : {{userDetails.position}}</p>
-        <p>Height : {{userDetails.height}}</p>
-        <p>Weight : {{userDetails.weight}}</p>
+        </div>
+      <mat-card-title style="margin-left: 10%">{{
+        userDetails.userName
+      }}</mat-card-title>
+      <mat-card-subtitle class="card-subtitle">{{
+        userDetails.e_Mail
+      }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="content">
+      <p>Fullname : {{ userDetails.fullName }}</p>
+      <p>Surname : {{ userDetails.surname }}</p>
+      <p>Age : {{ userDetails.age }}</p>
+      <p>Gender : {{ userDetails.gender == "male" ? "Male" : "Female" }}</p>
+      <p>City : {{ userDetails.position }}</p>
+      <p>Height : {{ userDetails.height }}</p>
+      <p>Weight : {{ userDetails.weight }}</p>
+    </mat-card-content>
 
-      </mat-card-content>
+    <mat-card-footer>
+      <button
+        mat-fab
+        color="accent"
+        style="float: right"
+        (click)="deleteUser(this.userDetails.id, 1)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
 
-      <mat-card-footer>
-        <button mat-fab color="accent" style="float: right;"  (click)="deleteUser(this.userDetails.id,1)"><mat-icon>delete</mat-icon></button>
-
-        <button mat-fab color="accent" style="float: right;margin-right: 2%;" routerLink="/edit-profile" routerLinkActive="active"><mat-icon>edit</mat-icon></button>
-
-
-      </mat-card-footer>
+      <button
+        mat-fab
+        color="accent"
+        style="float: right; margin-right: 2%"
+        routerLink="/edit-profile"
+        routerLinkActive="active"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card-footer>
   </mat-card>
+  </div> -->
 
+<div class="page-content page-container"  id="page-content" *ngIf="check() && userDetails != undefined">
+  <div class="padding">
+    <div class="row container d-flex justify-content-center">
+      <div class="col-xl-6 col-md-12">
+
+        <div class="card user-card-full">
+          <div class="row m-l-0 m-r-0">
+            <div class="col-sm-4 bg-c-lite-green user-profile">
+              <div class="card-block text-center text-white">
+                <div class="m-b-25">
+                  <img
+                    src="../../../assets/img/pepeProfile.png"
+                    class="img-radius"
+                    alt="User-Profile-Image"
+                  />
+                </div>
+                <h6 class="f-w-600">{{userDetails.userName }}</h6>
+
+                <i
+                  class="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"
+                ></i>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="card-block">
+                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Fullname</p>
+                    <h6 class="text-muted f-w-400">{{userDetails.fullName}}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Surname</p>
+                    <h6 class="text-muted f-w-400">{{userDetails.surname}}</h6>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Age</p>
+                    <h6 class="text-muted f-w-400">{{userDetails.age}}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Gender</p>
+                    <h6 class="text-muted f-w-400">{{userDetails.gender}}</h6>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">City</p>
+                    <h6 class="text-muted f-w-400">{{userDetails.position}}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Email</p>
+                    <h6 class="text-muted f-w-400">{{userDetails.e_Mail}}</h6>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Height</p>
+                    <h6 class="text-muted f-w-400">{{userDetails.height}}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Weight</p>
+                    <h6 class="text-muted f-w-400">{{userDetails.weight}}</h6>
+                  </div>
+                </div>
+
+<!--                 <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">
+                  Projects
+                </h6>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Recent</p>
+                    <h6 class="text-muted f-w-400">Sam Disuja</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Most Viewed</p>
+                    <h6 class="text-muted f-w-400">Dinoter husainm</h6>
+                  </div>
+                </div>
+                <ul class="social-link list-unstyled m-t-40 m-b-10">
+                  <li>
+                    <a
+                      href="#!"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title=""
+                      data-original-title="facebook"
+                      data-abc="true"
+                      ><i
+                        class="mdi mdi-facebook feather icon-facebook facebook"
+                        aria-hidden="true"
+                      ></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      href="#!"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title=""
+                      data-original-title="twitter"
+                      data-abc="true"
+                      ><i
+                        class="mdi mdi-twitter feather icon-twitter twitter"
+                        aria-hidden="true"
+                      ></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      href="#!"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title=""
+                      data-original-title="instagram"
+                      data-abc="true"
+                      ><i
+                        class="mdi mdi-instagram feather icon-instagram instagram"
+                        aria-hidden="true"
+                      ></i
+                    ></a>
+                  </li>
+                </ul> -->
+              </div>
+              <button
+              mat-fab
+              color="accent"
+              style="float: right"
+              (click)="deleteUser(this.userDetails.id, 1)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+
+            <button
+              mat-fab
+              color="accent"
+              style="float: right; margin-right: 2%"
+              routerLink="/edit-profile"
+              routerLinkActive="active"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div *ngIf = "this.EventService.profileShowEvents">
-  <button *ngFor="let item of this.EventService.profileShowEvents"routerLink="/eventdetails/{{item.id}}"> {{item.name}}</button>
+<div class="row container d-flex justify-content-center ">
+  <div class="col" style="text-align: center">
+    <h1>Created Events</h1>
+    <div style=" margin-left: 29%;" *ngIf="this.EventService.createdList">
+      <table
+        mat-table
+        [dataSource]="dataSourceCreatedEvents!"
+        matSort
+        class="mat-elevation-z8"
+        style="border-radius: 2%;width: 600px;"
+      >
 
+        <ng-container matColumnDef="name">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by name"
+          >
+            Title
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
 
+        <ng-container matColumnDef="city">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by symbol"
+          >
+            City
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.city }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="sportType">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by symbol"
+          >
+            sportType
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.sportType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="size">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by symbol"
+          >
+            size
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.size }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="count">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by symbol"
+          >
+            count
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.count }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="startDate">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by symbol"
+          >
+            startDate
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.startDate | date }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="info">
+          <th mat-header-cell *matHeaderCellDef class="TableHeaderRow">
+            info
+          </th>
+          <td mat-cell *matCellDef="let myRowData2">
+            <button
+              mat-mini-fab
+              color="primary"
+              aria-label="info Row"
+              routerLink="/eventdetails/{{ myRowData2.id }}"
+            >
+              <mat-icon>info_outline</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+      </table>
+      <mat-paginator  style="width: 600px;" id="pagination2" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+      </mat-paginator>
+    </div>
+  </div>
 </div>
 
-
+<!-- <div *ngIf="this.EventService.profileShowEvents">
+  <ng-container *ngFor="let item of this.EventService.profileShowEvents">
+    <li>
+      <button routerLink="/eventdetails/{{ item.id }}">{{ item.name }}</button>
+    </li>
+  </ng-container>
+</div>
+ -->

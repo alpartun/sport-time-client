@@ -48,6 +48,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort';
 import { EventdetailsComponent } from './event/eventdetails/eventdetails.component';
 import { EditEventComponent } from './event/edit-event/edit-event.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { EditEventComponent } from './event/edit-event/edit-event.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatListModule,
 
     ToastrModule.forRoot({
       positionClass:'toast-top-right'	,

@@ -1,7 +1,139 @@
+<div class="container">
+  <div class="jumbotron">
+    <div class="col" style="text-align: center; margin-top: 20px">
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      In Here Information about website
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col" style="text-align: center">
+      <h1>Joined Events</h1>
+      <div *ngIf="this.EventService.profileShowEvents">
+        <table
+          mat-table
+          [dataSource]="dataSource2!"
+          matSort
+          class="mat-elevation-z8"
+          style="border-radius: 2%;width: 546px;"
+        >
+          <ng-container matColumnDef="name">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by name"
+            >
+              Title
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="city">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by symbol"
+            >
+              City
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.city }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="sportType">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by symbol"
+            >
+              sportType
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.sportType }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="size">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by symbol"
+            >
+              size
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.size }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="count">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by symbol"
+            >
+              count
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.count }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="startDate">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by symbol"
+            >
+              startDate
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.startDate | date }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="info">
+            <th mat-header-cell *matHeaderCellDef class="TableHeaderRow">
+              info
+            </th>
+            <td mat-cell *matCellDef="let myRowData2">
+              <button
+                mat-mini-fab
+                color="primary"
+                aria-label="info Row"
+                routerLink="/eventdetails/{{ myRowData2.id }}"
+              >
+                <mat-icon>info_outline</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator style="width: 546px;" id="pagination"  [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" >
+        </mat-paginator>
+
+      </div>
 
 
-<p>
-  home works!
-</p>
+    </div>
+    <div class="col" style="text-align: center">
+      <h1>Created Events</h1>
+
+    </div>
 
 
+  </div>
+</div>

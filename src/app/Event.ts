@@ -1,6 +1,6 @@
 import { UserDetails } from './UserDetails';
 export interface Event {
-  id?:string,
+  id?:number,
   name?:string,
   description?:string,
   city?:string,
@@ -14,6 +14,7 @@ export interface Event {
   amount?:string,
   count?:number,
   createdBy?:string,
-  users? : UserDetails
+  users? : UserDetails,
+  contact?:string,
 
 }

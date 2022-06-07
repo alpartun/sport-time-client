@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   hide = true;
@@ -13,38 +13,48 @@ export class RegisterComponent implements OnInit {
   selectedValue: string = 'sentiment_very_satisfied';
   selectedGender!: string;
   genders: Gender[] = [
-    {value:'male', viewValue:'Male'},
-    {value:'female', viewValue:'Female'},
-];
-  constructor(public service: UserService, private toastr :ToastrService) {  }
+    { value: 'male', viewValue: 'Male' },
+    { value: 'female', viewValue: 'Female' },
+  ];
+  constructor(public service: UserService, private toastr: ToastrService) {}
   ngOnInit(): void {
     this.service.formModel.reset();
   }
-  onSubmit(){
+  onSubmit() {
     return this.service.register().subscribe(
-      (res:any) => {
-        if(res.succeeded){
+      (res: any) => {
+        if (res.succeeded) {
           this.service.formModel.reset();
-          this.toastr.success('New user created succesfully!','Registration succesfull.')
-        } else{
-          res.errors.forEach((element: { code: any; }) => {
-            switch(element.code){
+          this.toastr.success(
+            'New user created succesfully!',
+            'Registration succesfull.'
+          );
+        } else {
+          res.errors.forEach((element: { code: any }) => {
+            switch (element.code) {
               case 'DuplicateUserName':
-                this.toastr.error('Username is already taken.', 'Registration faild.')//Username is already taken.
-              break;
-              default :
-              this.toastr.error('Registration failed.','Registration failed.')//Registration failed.
-              break;
-            }});
+                this.toastr.error(
+                  'Username is already taken.',
+                  'Registration faild.'
+                ); //Username is already taken.
+                break;
+              default: //Registration failed.
+                this.toastr.error(
+                  'Registration failed.',
+                  'Registration failed.'
+                );
+                break;
+            }
+          });
         }
       },
-      err=>{
+      (err) => {
         console.log(err);
       }
     );
   }
 }
-interface Gender{
-  value:string;
-  viewValue:string;
+interface Gender {
+  value: string;
+  viewValue: string;
 }

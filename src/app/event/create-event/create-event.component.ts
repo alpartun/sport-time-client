@@ -9,7 +9,7 @@ import { ThemePalette } from '@angular/material/core';
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
-  styleUrls: ['./create-event.component.scss']
+  styleUrls: ['./create-event.component.scss'],
 })
 export class CreateEventComponent implements OnInit {
   userDetails?: UserDetails;
@@ -20,32 +20,36 @@ export class CreateEventComponent implements OnInit {
   public stepMinutes = [1, 5, 10, 15, 20, 25];
   public stepSeconds = [1, 5, 10, 15, 20, 25];
 
-  constructor(public services : EventService, private toastr :ToastrService, private userService : UserService, private router : Router) { }
+  constructor(
+    public services: EventService,
+    private toastr: ToastrService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-
     this.userService.getUserProfile().subscribe(
-      (res:any)=>{
-        this.userService.isAuthenticated=true;
-        this.userDetails = res ;
+      (res: any) => {
+        this.userService.isAuthenticated = true;
+        this.userDetails = res;
       },
-      (err:any)=>{
+      (err: any) => {
         localStorage.removeItem('token');
-        this.userService.isAuthenticated=false;
-        console.log(err)
+        this.userService.isAuthenticated = false;
+        console.log(err);
         this.router.navigate(['/user/login']);
       }
-    )
+    );
   }
-  onSubmit(){
+  onSubmit() {
     this.services.createEvent(this.userDetails).subscribe(
-      (res:any) => {
+      (res: any) => {
         this.services.formModel.reset();
-        this.toastr.success('','Event is created.')
+        this.toastr.success('', 'Event is created.');
       },
-      err => {
+      (err) => {
         console.log(err);
-        this.toastr.error('','Error has occured.')
+        this.toastr.error('', 'Error has occured.');
       }
     );
   }

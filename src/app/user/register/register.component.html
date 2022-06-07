@@ -1,122 +1,206 @@
-<mat-card  [formGroup]="service.formModel" (ngSubmit)="onSubmit()" class="matcard">
-      <div fxLayout="row" class="form-group">
+<mat-card
+  [formGroup]="service.formModel"
+  (ngSubmit)="onSubmit()"
+  class="matcard"
+>
+  <div fxLayout="row" class="form-group">
+    <mat-form-field>
+      <mat-label>Fullname</mat-label>
+      <input
+        matInput
+        placeholder=""
+        formControlName="FullName"
+        required="*"
+        class="form-control"
+      />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
 
-        <mat-form-field  >
-          <mat-label>Fullname</mat-label>
-          <input matInput placeholder="" formControlName='FullName' required="*" class="form-control">
-          <mat-icon matSuffix>person</mat-icon>
-        </mat-form-field>
+    <mat-form-field style="margin-left: 6%;">
+      <mat-label>Surname</mat-label>
+      <input
+        matInput
+        placeholder=""
+        formControlName="Surname"
+        required="*"
+        class="form-control"
+      />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" class="form-group">
+    <mat-form-field>
+      <mat-error
+        *ngIf="service.formModel.get('UserName')?.touched && service.formModel.get('UserName')?.errors?.['required'] "
+      >
+        Username is required.
+      </mat-error>
+      <mat-label> Username </mat-label>
+      <input
+        matInput
+        placeholder=""
+        formControlName="UserName"
+        required="*"
+        class="form-control"
+      />
+      <mat-icon matSuffix>face</mat-icon>
+    </mat-form-field>
 
+    <mat-form-field style="margin-left: 6%;">
+      <mat-label>Age</mat-label>
+      <input
+        matInput
+        placeholder=""
+        formControlName="Age"
+        required="*"
+        class="form-control"
+      />
+      <mat-icon matSuffix>face</mat-icon>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" formGroupName="Passwords" class="form-group">
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder=""
+        [type]="hide ? 'password' : 'text'"
+        formControlName="Password"
+        required="*"
+        class="form-control"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
 
-        <mat-form-field >
-          <mat-label>Surname</mat-label>
-          <input matInput placeholder="" formControlName='Surname' required="*" class="form-control">
-          <mat-icon matSuffix>person</mat-icon>
-        </mat-form-field>
+    <mat-form-field style="margin-left: 6%;">
+      <mat-label>Confirmed Password</mat-label>
+      <input
+        matInput
+        placeholder=""
+        [type]="cHide ? 'password' : 'text'"
+        formControlName="ConfirmedPassword"
+        class="form-control"
+      />
+      <mat-error
+        *ngIf="service.formModel.get('Passwords.ConfirmedPassword')?.touched && service.formModel.get('Passwords.ConfirmedPassword')?.errors?.['passwordMissmatch'] "
+      >
+        Passwords are does not match.
+      </mat-error>
 
-    </div>
-    <div fxLayout="row" class="form-group">
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="cHide = !cHide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+        required="*"
+        class="form-control"
+      >
+        <mat-icon>{{ cHide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" class="form-group">
+    <mat-form-field>
+      <mat-label>E Mail</mat-label>
+      <input
+        matInput
+        placeholder=""
+        formControlName="E_Mail"
+        required="*"
+        class="form-control"
+      />
+      <mat-error
+        *ngIf="service.formModel.get('E_Mail')?.touched && service.formModel.get('E_Mail')?.errors?.['email'] "
+      >
+        e_mail is required.
+      </mat-error>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
 
-        <mat-form-field  >
-          <mat-error *ngIf="service.formModel.get('UserName')?.touched && service.formModel.get('UserName')?.errors?.['required'] " >
-          Username is required.
-          </mat-error>
-            <mat-label>
-              Username
-            </mat-label>
-          <input matInput placeholder="" formControlName='UserName' required="*" class="form-control">
-          <mat-icon matSuffix>face</mat-icon>
-        </mat-form-field>
+    <mat-form-field style="margin-left: 6%;">
+      <mat-label>Confirmed E Mail</mat-label>
+      <input
+        matInput
+        placeholder=""
+        formControlName="ConfirmedE_Mail"
+        required="*"
+        class="form-control"
+      />
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" class="form-group">
+    <mat-form-field>
+      <mat-label>Gender</mat-label>
+      <mat-select
+        formControlName="Gender"
+        required="*"
+        [(value)]="selectedValue"
+      >
+        <mat-option *ngFor="let gender of genders" [value]="gender.value">
+          {{ gender.viewValue }}
+        </mat-option>
+      </mat-select>
 
-        <mat-form-field >
-          <mat-label>Age</mat-label>
-          <input matInput placeholder="" formControlName='Age' required="*" class="form-control">
-          <mat-icon matSuffix>face</mat-icon>
-        </mat-form-field>
+      <mat-icon matSuffix>{{ selectedValue }}</mat-icon>
+    </mat-form-field>
 
-    </div>
-    <div fxLayout="row" formGroupName="Passwords" class="form-group">
+    <mat-form-field style="margin-left: 6%;">
+      <mat-label>City</mat-label>
+      <input
+        matInput
+        placeholder=""
+        formControlName="Position"
+        required="*"
+        class="form-control"
+      />
+      <mat-icon matSuffix>location_city</mat-icon>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" class="form-group">
+    <mat-form-field>
+      <mat-label>Height</mat-label>
+      <input
+        matInput
+        placeholder=""
+        formControlName="Height"
+        class="form-control"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
 
-        <mat-form-field  >
-          <mat-label>Password</mat-label>
-          <input matInput placeholder="" [type]="hide ? 'password' : 'text'" formControlName='Password' required="*" class="form-control">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-
-          </button>
-        </mat-form-field>
-
-        <mat-form-field >
-          <mat-label>Confirmed Password</mat-label>
-          <input matInput placeholder="" [type]="cHide ? 'password' : 'text'" formControlName='ConfirmedPassword' class="form-control">
-          <mat-error *ngIf="service.formModel.get('Passwords.ConfirmedPassword')?.touched && service.formModel.get('Passwords.ConfirmedPassword')?.errors?.['passwordMissmatch'] ">
-          Passwords are does not match.
-          </mat-error>
-
-          <button mat-icon-button matSuffix (click)="cHide = !cHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" required="*" class="form-control">
-            <mat-icon>{{cHide ? 'visibility_off' : 'visibility'}}</mat-icon>
-
-          </button>
-        </mat-form-field>
-
-    </div>
-    <div fxLayout="row" class="form-group">
-
-        <mat-form-field  >
-          <mat-label>E Mail</mat-label>
-          <input matInput placeholder="" formControlName='E_Mail' required="*" class="form-control">
-          <mat-error *ngIf="service.formModel.get('E_Mail')?.touched && service.formModel.get('E_Mail')?.errors?.['email'] ">
-           e_mail is required.
-          </mat-error>
-          <mat-icon matSuffix>email</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field >
-          <mat-label>Confirmed E Mail</mat-label>
-          <input matInput placeholder=""formControlName='ConfirmedE_Mail' required="*" class="form-control">
-          <mat-icon matSuffix>email</mat-icon>
-        </mat-form-field>
-
-    </div>
-    <div fxLayout="row" class="form-group">
-
-        <mat-form-field  >
-          <mat-label>Gender</mat-label>
-          <mat-select  formControlName='Gender' required="*" [(value)]="selectedValue" >
-            <mat-option *ngFor="let gender of genders" [value]="gender.value">
-              {{gender.viewValue}}
-            </mat-option>
-          </mat-select>
-
-
-              <mat-icon matSuffix>{{selectedValue}}</mat-icon>
-
-        </mat-form-field>
-
-        <mat-form-field >
-          <mat-label>City</mat-label>
-          <input matInput placeholder="" formControlName='Position' required="*" class="form-control">
-          <mat-icon matSuffix>location_city</mat-icon>
-        </mat-form-field>
-
-    </div>
-    <div fxLayout="row" class="form-group">
-        <mat-form-field >
-          <mat-label>Height</mat-label>
-          <input matInput placeholder="" formControlName='Height' class="form-control">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-
-        </mat-form-field>
-
-        <mat-form-field >
-          <mat-label>Weight</mat-label>
-          <input matInput placeholder="" formControlName='Weight' class="form-control">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-    </div>
-    <div fxLayout="row" class ='button' >
-
-    <button class="asd" mat-raised-button color="primary" type="submit" [disabled]="!service.formModel.valid" (click)="onSubmit()" routerLink="/user/login" routerLinkActive="active">Register</button>
-    </div>
-  </mat-card>
-
+    <mat-form-field style="margin-left: 6%;">
+      <mat-label>Weight</mat-label>
+      <input
+        matInput
+        placeholder=""
+        formControlName="Weight"
+        class="form-control"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" class="button">
+    <button
+      class="asd"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!service.formModel.valid"
+      (click)="onSubmit()"
+      routerLink="/user/login"
+      routerLinkActive="active"
+    >
+      Register
+    </button>
+  </div>
+</mat-card>
